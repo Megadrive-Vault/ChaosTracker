@@ -1,0 +1,271 @@
+SNASM68K version 2.02Ex of Mar 24 1995, 15:22:35
+(c) 1993-95 Cross Products Ltd. All Rights Reserved
+
+
+
+     Value  Type  Class  Symbol                  Refs   Line File
+   ------------------------------------------------------------------------
+
+       200               ROMSTART                 2      97 Init.asm
+       210         local @1                       2     102 Init.asm
+       236         local @INITSTACK               2     128 Init.asm
+       23c         local @INITSTACK2              1     134 Init.asm
+       272               SkipSetup                2     174 Init.asm
+       278               Table                    2     180 Init.asm
+       2c0               Interrupt               51     209 Init.asm
+       38a         local @Infinite_Loop           1     238 Init.asm
+       38e               Bus_Error                2     242 Init.asm
+       458         local @Infinite_Loop           1     270 Init.asm
+       45c               Address_Error            2     274 Init.asm
+       526         local @Infinite_Loop           1     302 Init.asm
+       52a               Illegal_Opcode           2     306 Init.asm
+       5f4         local @Infinite_Loop           1     334 Init.asm
+       5f8               Division_By_Zero         2     338 Init.asm
+       6c2         local @Infinite_Loop           1     366 Init.asm
+       6c6               CHK_Exception            2     370 Init.asm
+       790         local @Infinite_Loop           1     398 Init.asm
+       794               TRAPV_Exception          2     402 Init.asm
+       85e         local @Infinite_Loop           1     430 Init.asm
+       862               Privilege_Violation      2     434 Init.asm
+       92c         local @Infinite_Loop           1     462 Init.asm
+       930               TRACE_Exception          2     466 Init.asm
+       9fa         local @Infinite_Loop           1     494 Init.asm
+       9fe               LineA_Emulator           2     498 Init.asm
+       ac8         local @Infinite_Loop           1     526 Init.asm
+       acc               LineF_Emulator           2     530 Init.asm
+       b96         local @Infinite_Loop           1     558 Init.asm
+       b9a               HBlank_Interrupt         2     563 Init.asm
+       ba6               VBlank_Interrupt         2     567 Init.asm
+       bb2               InitZ80                  2     575 Init.asm
+       bba         local @Z80LOAD                 1     580 Init.asm
+       bce               InitPSG                  2     596 Init.asm
+       bd0         local @PSGOFF                  1     599 Init.asm
+       bdc               InitVDP                  2     615 Init.asm
+       be4         local @INITVDPREGS             1     619 Init.asm
+       bf0               VDPRegs                  2     630 Init.asm
+       c0c               SystemFont               2       8 Graphics/Tiles/SysFont.asm
+       c18               SystemFont_pal           5      15 Graphics/Tiles/SysFont.asm
+       c38               SystemFont_tiles         5      34 Graphics/Tiles/SysFont.asm
+      2c38               MenuBar                  0       7 Graphics/MenuBar.asm
+      2c42               MenuBar_maps             2      15 Graphics/MenuBar.asm
+      2c46               MenuBar_map             26      19 Graphics/MenuBar.asm
+      3506               Load_System_Palette_1
+                                                  3       8 VDP/VDPWrite.asm
+      3524               Load_System_Font_A       3      16 VDP/VDPWrite.asm
+      3540               Load_Palette_1           3      35 VDP/VDPWrite.asm
+      354c               Load_Tiles_A             3      40 VDP/VDPWrite.asm
+      3558               CharTest                 0      52 VDP/VDPWrite.asm
+      357e               Wipe_Plane_A             6       1 VDP/Generic.asm
+      358e         local @WipeA                   1       4 VDP/Generic.asm
+      359c               Wipe_Plane_B             6      10 VDP/Generic.asm
+      35ac         local @WipeB                   1      13 VDP/Generic.asm
+      35ba               Buffer_To_Plane_A        0      19 VDP/Generic.asm
+      35d0         local @Load_Buffer             1      23 VDP/Generic.asm
+      35dc               Buffer_To_Plane_B        0      29 VDP/Generic.asm
+      35f2         local @Load_Buffer             1      33 VDP/Generic.asm
+      35fe               Detect_PAL               6      39 VDP/Generic.asm
+      3608               YM2612_Fetch_Note        3     191 YM2612/YDemo.asm
+      3622               YM2612_Convert_Byte_To_Freq
+                                                  2     204 YM2612/YDemo.asm
+      3636         local @Continue                1     215 YM2612/YDemo.asm
+      363e         local @PAL_Detected            2     226 YM2612/YDemo.asm
+      3648               YM2612_Output_Ch1        3     231 YM2612/YDemo.asm
+      3664         local @Z80BUSRQ                1     245 YM2612/YDemo.asm
+      5b44               Init_YM2612              2     458 YM2612/YDemo.asm
+      7086               YM2612_Frequency_Table_NTSC
+                                                  2       1 YM2612/YM_NTSC.asm
+      7188               YM2612_Frequency_Table_PAL
+                                                  2       1 YM2612/YM_PAL.asm
+      728a               GPIANO                   1       1 Tools/Gpiano.asm
+      72b0               PSG_Frequency_Table_NTSC
+                                                  3       1 PSG/PSG_NTSC.asm
+      73b0               PSG_Frequency_Table_PAL
+                                                  3       1 PSG/PSG_PAL.asm
+      74b0               PSGDemo                  0       1 PSG/PSGDemo.asm
+      74c4               PSG_Convert_Byte_to_Freq
+                                                  2       8 PSG/PSGDemo.asm
+      74d8         local @Continue                1      14 PSG/PSGDemo.asm
+      74e2         local @PAL_Detected            2      23 PSG/PSGDemo.asm
+      74ea               PSG_Output               2      28 PSG/PSGDemo.asm
+      7504               Hello_World              0       3 ExceInfo.asm
+      751f               Exception_Display        3      16 ExceInfo.asm
+      75b9               Error_0                  3      20 ExceInfo.asm
+      75c6               Interrupt_1              3      22 ExceInfo.asm
+      75d0               Bus_Error_2              3      24 ExceInfo.asm
+      75da               Address_Error_3          3      26 ExceInfo.asm
+      75e8               Illegal_Opcode_4         3      28 ExceInfo.asm
+      75f7               Division_By_Zero_5       3      30 ExceInfo.asm
+      7608               CHK_Exception_6          3      32 ExceInfo.asm
+      7616               TRAPV_Exception_7        3      34 ExceInfo.asm
+      7626               Privilege_Violation_8
+                                                  3      36 ExceInfo.asm
+      763a               TRACE_Exception_9        3      38 ExceInfo.asm
+      764a               LineA_Emulator_A         3      40 ExceInfo.asm
+      765a               LineF_Emulator_B         3      42 ExceInfo.asm
+      766a               Exception_Screen        32      45 ExceInfo.asm
+      7944         local @PrintString             6     215 ExceInfo.asm
+      795a         local @PrintLoop               3     224 ExceInfo.asm
+      7978         local @TerminateString         2     238 ExceInfo.asm
+      797a         local @NewLineString           2     241 ExceInfo.asm
+      7984               Print_RAM_String        71     246 ExceInfo.asm
+      7998         local @PrintRAMLoop            1     258 ExceInfo.asm
+      79aa         local @FinishCompensate        1     273 ExceInfo.asm
+      79b6         local @FinishCompensate2       1     278 ExceInfo.asm
+      79ce         local @CompensateHex           2     287 ExceInfo.asm
+      79d6         local @CompensateHex2          2     291 ExceInfo.asm
+      79de               Assign_Exception         2     295 ExceInfo.asm
+      7a2e         local @EC0                     2     323 ExceInfo.asm
+      7a36         local @EC1                     2     326 ExceInfo.asm
+      7a3e         local @EC2                     2     329 ExceInfo.asm
+      7a46         local @EC3                     2     332 ExceInfo.asm
+      7a4e         local @EC4                     2     335 ExceInfo.asm
+      7a56         local @EC5                     2     338 ExceInfo.asm
+      7a5e         local @EC6                     2     341 ExceInfo.asm
+      7a66         local @EC7                     2     344 ExceInfo.asm
+      7a6e         local @EC8                     2     347 ExceInfo.asm
+      7a76         local @EC9                     2     350 ExceInfo.asm
+      7a7e         local @ECa                     2     353 ExceInfo.asm
+      7a86         local @ECb                     2     356 ExceInfo.asm
+      7a8e               Start_VBlank             1       5 SysRout.asm
+      7a9e               End_VBlank               1      11 SysRout.asm
+      7aae               .Z80BUSRQ                1      22 SysRout.asm
+      7aae               Z80_Bus_REQ              2      21 SysRout.asm
+      7acc               Z80_Bus_REQ_End          2      28 SysRout.asm
+      7ae6               Poll_Input_3_Button_Pad_1
+                                                  0      55 SysRout.asm
+      7b0c               Poll_Input_3_Button_Pad_2
+                                                  0      64 SysRout.asm
+      7b32               Handle_Input_3_Button_Pad_1
+                                                  0       5 InputPol.asm
+      7b46               .NoStart                 2      13 InputPol.asm
+      7b48               .Start                   2      17 InputPol.asm
+      7b4a               Initialize_Tracker       3       7 TrackIni.asm
+      7b94               Initialize_Test_Row      2      29 TrackIni.asm
+      7bb0               Initialize_Pattern_Banks
+                                                  2      38 TrackIni.asm
+      7bbe               Initialize_FM_Bank_Arrays
+                                                  2      47 TrackIni.asm
+      7bcc               Initialize_PSG_Bank_Arrays
+                                                  2      52 TrackIni.asm
+      7bda               Initialize_FM_Presets
+                                                  2      57 TrackIni.asm
+      7be8         local @Continue                1      62 TrackIni.asm
+      7bf2         local @Start_Main_Loop         1      65 TrackIni.asm
+      7bf8         local @Next_Iteration          0      68 TrackIni.asm
+      7c04               Initialize_PSG_Presets
+                                                  0      74 TrackIni.asm
+      7c06               Initialize_Default_User_Settings
+                                                  2      84 TrackIni.asm
+      7c28               Initialize_User_Interface
+                                                  2      93 TrackIni.asm
+      7c4a               Calculate_Pattern_Bank_Pointers
+                                                  2      99 TrackIni.asm
+      7ca0               Initialize_FM_Pattern_Index
+                                                  2     139 TrackIni.asm
+      7cb2         local @Init_Index_Loop         1     143 TrackIni.asm
+      7cba               Initialize_PSG_Pattern_Index
+                                                  2     148 TrackIni.asm
+      7cd2         local @Init_Index_Loop         1     153 TrackIni.asm
+      7cda               Initialize_FM_Pattern_Array
+                                                  2     161 TrackIni.asm
+      7d0e         local @Init_Array              2     173 TrackIni.asm
+      7d28               Initialize_PSG_Pattern_Array
+                                                  2     184 TrackIni.asm
+      7d5c         local @Init_Array              2     196 TrackIni.asm
+      7d76               User_Interface           0       1 UI.asm
+      7d90               Wipe_Screen_Buffer_A     5      10 UI.asm
+      7d9e         local @Wipe                    1      14 UI.asm
+      7da6               Wipe_Screen_Buffer_B     5      19 UI.asm
+      7db4         local @Wipe                    1      23 UI.asm
+      7dbc               Load_Menubar             2      29 UI.asm
+      7dd6               Check_Menubar_Selection
+                                                  2      38 UI.asm
+      7e14               Menubar_File_Selected
+                                                  2      58 UI.asm
+      7e70         local @Skip                    2      80 UI.asm
+      7e72               Menubar_Edit_Selected
+                                                  8      83 UI.asm
+      7ece         local @Skip                    2     105 UI.asm
+      7ed0               Menubar_View_Selected
+                                                  5     108 UI.asm
+      7f2c         local @Skip                    2     130 UI.asm
+      7f2e               Menubar_Help_Selected
+                                                  2     132 UI.asm
+      7f8a         local @Skip                    2     154 UI.asm
+      7f8c               Submenu_Pattern_Selected
+                                                  2     157 UI.asm
+      7fee         local @Skip                    2     179 UI.asm
+      7ff0               Submenu_Select_Selected
+                                                  2     182 UI.asm
+      8052         local @Skip                    2     204 UI.asm
+      8054               Submenu_Instruments_Selected
+                                                  2     207 UI.asm
+      80b6         local @Skip                    2     229 UI.asm
+      80b8               Load_Panel              23     232 UI.asm
+      80ee         local @Load_To_Buffer          2     259 UI.asm
+      8112         local @Done                    2     272 UI.asm
+      8114               Highlight_Label         41     276 UI.asm
+      814a         local @Load_To_Buffer          2     303 UI.asm
+      8176         local @Done                    2     319 UI.asm
+      8178               MenuBarSpecs             2       2 Menubar.asm
+      8184               MenuBarFileLabel         2      10 Menubar.asm
+      8190               MenuBarEditLabel         2      14 Menubar.asm
+      819c               MenuBarViewLabel         2      18 Menubar.asm
+      81a8               MenuBarHelpLabel         2      22 Menubar.asm
+      81b4               MenuBarFileSpecs         2      28 Menubar.asm
+      81c0               MenuBarEditSpecs         2      32 Menubar.asm
+      81cc               MenuBarViewSpecs         2      36 Menubar.asm
+      81d8               MenuBarHelpSpecs         2      40 Menubar.asm
+      81e4               SubMenuPatternSpecs      2      44 Menubar.asm
+      81f0               SubMenuSelectSpecs       2      48 Menubar.asm
+      81fc               SubMenuInstrumentsSpecs
+                                                  2      52 Menubar.asm
+      8208               MenuBarPatternLabel      2      58 Menubar.asm
+      8214               MenuBarSelectLabel       2      62 Menubar.asm
+      8220               MenuBarInstrumentsLabel
+                                                  2      66 Menubar.asm
+      822c               LabelHighlightLUT       20      12 LabelLut.asm
+      8238               FileMenuLabels           0      23 LabelLut.asm
+      8280               EditMenuLabels           0      43 LabelLut.asm
+      82d4               ViewMenuLabels           0      66 LabelLut.asm
+      8310               HelpMenuLabels           0      83 LabelLut.asm
+      8340               PatternSubMenuLabels     0      97 LabelLut.asm
+      837c               SelectSubMenuLabels      0     114 LabelLut.asm
+      8394               InstrumentSubMenuLabels
+                                                  0     122 LabelLut.asm
+      83d0               startup                  2      53 main.asm
+      83e2               MAIN                     1      63 main.asm
+
+
+
+ Filename Table
+ --------------
+
+Base directory : C:\USERS\CORYCU~1\DESKTOP\DEV\SEGA\CHAOSTRA\V005
+
+  1    asm: main.asm
+  2    asm: Init.asm
+  3    asm: Globals.asm
+  4    asm: Graphics/Tiles/SysFont.asm
+  5    asm: Graphics/MenuBar.asm
+  6    asm: VDP/VDPWrite.asm
+  7    asm: VDP/Generic.asm
+  8    asm: YM2612/YGlobals.asm
+  9    asm: YM2612/YDemo.asm
+ 10    asm: YM2612/YM_NTSC.asm
+ 11    asm: YM2612/YM_PAL.asm
+ 12    asm: Tools/Gpiano.asm
+ 13    asm: PSG/PSG_NTSC.asm
+ 14    asm: PSG/PSG_PAL.asm
+ 15    asm: PSG/PSGDemo.asm
+ 16    asm: ExceInfo.asm
+ 17    asm: SysRout.asm
+ 18    asm: InputPol.asm
+ 19    asm: TrackIni.asm
+ 20    asm: UI.asm
+ 21    asm: Menubar.asm
+ 22    asm: LabelLut.asm
+
+
+
+
