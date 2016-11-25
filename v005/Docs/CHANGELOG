@@ -1,0 +1,49 @@
+Chaos Tracker CHANGELOG
+
+v001 
+
+* Note: using asmx on Linux for all assembly code 
+UPDATE: Switched to snasm68k.exe in Windows starting v003
+
+* Started on ROM header and INIT code
+* Built test rom runs on Regen 0.97D on Linux under Wine
+* Chaos Tracker is bug free :) Wow!
+* Added in VBlank sync code
+* Added 2 screen buffers for plane's A and B
+* Started on Screen Management code
+* Started on the menu UI
+* Wrote a C application to help in calculating values for the UI
+
+v002
+
+* Reorganized project structure, adding bin and docs folders and renaming some source files
+* Put UI work on the back burner for a while, in favor of the sound engine
+* Created YM2612 memory map in YM2612Globals.asm, what a pain
+* Created a very basic YM2612 frequency table, using values given in the Sega docs
+* Wrote Demo routines to generate chromatic scale to RAM and read a note from that and buffer it as oct+freq data
+* Wrote a basic YM2612 driver
+
+v003
+
+*Long hiatus over :)
+*Converted entire project from asmx to snasm68k friendly code.
+*Commented out all but the YM2612 sound test from MAIN
+*Fixed a debilitating bug in the sound driver, caused by faulty z80 reset code
+*Started work on frequency table generating scripts for both NTSC and PAL YM2612 and PSG
+*Fixed a minor bug in sound driver writing to the wrong YM2612 port.
+*YM2612 test note works now
+
+v004
+
+*Finished up Python scripts to generate all the sound frequency tables needed for all regions
+*Successfully generated equal temperament lookup tables 
+*Cleaned up scripts and placed them in the Tools folder
+*Got YM2612 note conversion working, plays back test note
+*Cleaned up Bin folder, fixed build.bat
+*Got PSG note conversion working, plays back test note
+*Added PAL detection
+*NTSC or PAL frequency tables are loaded depending on the console's region, seems to work on Regen.
+
+v005
+*Started instrument preset system for YM2612
+*Added in Grand Piano preset

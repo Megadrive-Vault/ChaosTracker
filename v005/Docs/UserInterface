@@ -1,0 +1,187 @@
+Here is a high level abstract for Chaos Tracker screen management.
+
+Some desirable traits include:
+* Choice between LSDj style or text mode menu bar UI, a hybrid would be nice if possible.
+* Screen management doesn't actually update the screen, separate code does that.
+* As part of the overall visual system, a screen buffer would be an intersting idea. Perhaps a buffer could be done
+and everything still run smoothly? 
+
+
+
+
+The overal concept is to check the screen state, prepare that element of the screen to the buffer and when the VBlank occurs,
+write the buffer to the VDP. This makes a priority system necessary. The priority system can be simple, basically things are buffered
+in order of code occurrence, first come first serve. All that would need done is to clear the buffer, write things that are actually being 
+changed to the buffer, but staying within buffer/screen boundaries and leave alone what's already there otherwise... all in each frame. 
+This might bog down the overall program loop a bit more than last time around, but other stuff is expected to be done more optimally 
+anyways. At any rate, visual updates will be as crisp and smooth as possible. This is probaby the correct way to do it anyways, the only 
+concern out of this is the amount of processing time it will take.
+
+Let's investigate the elements of the screen...
+
+The screen is made up of 2 layouts, one for Plane A and one for Plane B
+Plane A always get's handled first, with screen control and screen updating
+A layout is made up of panels
+A panel is made up of labels and blank spaces
+A cursor highlights a label
+Misc elements can be drawn using the sprite system, as of this writing though, sprites will not be used.
+
+The screen is the embodiment of everything you see, well... on the screen!
+An example of a panel might be the whole table of 32 note rows, where the note/vol/command information is displayed and edited.
+Another example of a panel would be the Menu Bar, it's sub menus are also considered their own panels.
+
+Most of the work done will be on Plane A. The only time Plane B should ever be used is for a layout that can occur globally in any UI
+state, with maybe a couple of special exceptions. The Menu Bar is a Plane B element, the Synthesizer could potentially be a Plane B element 
+if it can be viably conceived for usefulness and UI shine. Most of the rest of the tracker's graphical elements will be a Plane A ordeal.
+The cursor will be on the same plane as the label it's highlighting. There's also the active layout and inactive layout. It's like Windows.
+If you click on a window it becomes the active window and all other windows become inactive, with a few exceptions.
+
+So we Wipe Plane A
+We check the UI state
+Draw Layout A
+Is Layout A active?
+Draw Cursor A and change to active palette if so, if not, then no cursor and change to inactive palette.
+Wipe Plane B
+We check the UI state
+Draw Layout B
+Is Layout B active?
+Draw Cursor B and change to active palette if so, if not, then no cursor and change to inactive palette.
+
+Update Buffer to VRAM/Palette changes to CRAM during VSync
+
+Modifications to that algorithm will likely be needed and refined. This my friend is called screen compositing and although it's
+questionable if the Genesis/Megadrive can even handle screen compositing code this detailed AND handle music, it will make for a powerful
+UI system that looks + operates nicely and smoothly. 
+
+
+MISC Info:
+
+Since a panel is an arbitrarily sized element and code needs to be modular, it's important to provide the X and Y dimensions of the 
+panel in some include code. Another interesting thing to investigate is the use of DMA, this could provide a performance increase. 
+Finally, if this entire method of screen compositing proves to be too slow for tracker use, even with optimizations, the panel
+concept can be mostly done away with. The end result should be the best console tracker UI ever made... or at least a decent one.
+
+
+External variables that influence what Screen Management does:
+
+CurrentScreen:
+Genesis/Megadrive
+0 - Pattern Editor
+1 - Track Editor (YM2612)
+2 -	Track Editor (PSG)
+3 - Track Editor (PCM)
+4 - Synthesizer (YM2612)
+5 - Synthesizer (PSG)
+6 - Groove
+7 - Options
+32x
+8 - Pattern Editor (32x)
+9 - Track Editor (PWM)
+A - Synthesizer (PWM)
+B - Options
+CD
+C - Pattern Editor (CD)
+D - Track Editor (CDPCM)
+32xCD
+E - Pattern Editor (32xCD)
+TEST
+F - Waveform Editor (This is a feature that may not be practical given the unusual quirks of the Genesis/Megadrive, however
+it will be there anyways, in case it can be done. Besides that, it might be more practical in 32xCD mode)
+
+10 - Synthesizer (CUSTOM)	In 32x/CD both modes it might be worthwhile to explore software synthesis for new types of sound
+and if performance is top notch in Genesis/MD mode and a sacrifice of FM6 is ok, then perhaps we could be seeing this in Gen/MD mode 
+as well. It would probably be a z80 only thing though! But would be an expensive operation.
+11 - Effects (CUSTOM)	Would likely be a 32x/CD only thing and for the custom Synthesizer + PCM only, but it would be nice to add.
+
+
+
+Menu Bar
+File:				Edit:							View:					Help:
+					Pattern:>>>>>>>>__________		Pattern Editor			General
+New	Song			Select:All/None Transpose		Track Editor>>>_______	Controls
+Load Song			Undo			Interpolate		Synthesizer>>>	YM2612	Commands
+Save Song			Redo			Duplicate		Groove			PSG		About
+Save As				Cut				Remap			Options			PCM
+Song Preferences	Copy			Wipe Pattern					PWM
+Reboot				Paste											CUSTOM
+					
+
+
+ActiveLayout:
+0 - Layout A
+1 - Layout B
+
+TrackerMode:
+0 - YMDj
+1 - Professional Mode
+
+MenuBarSelection:				FILE	EDIT	VIEW	HELP
+0 - Disabled			
+1 - File
+2 - Edit
+3 - View
+4 - Help
+5 - Pattern (Expanded)
+6 - Select (Expanded
+7 - Instruments (Expanded)
+
+
+MenuBarOptionSelection:
+0 - Disabled
+===Menu "File Options===
+1 - New Song
+2 - Load Song
+3 - Save Song
+4 - Save As
+5 - Song Pref
+6 - Reboot
+===Menu "Edit" Options
+7 - Pattern (Expandable)
+8 - Select (Expandable)
+9 - Undo 
+A - Redo
+B - Cut
+C - Copy
+D - Paste
+===Menu "View" Options===
+E - Pattern Editor
+F - Track Editor
+10 - Synthesizer (Expandable)
+11 - Groove
+12 - Settings
+===Menu "Help" Options===
+13 - General
+14 - Commands
+15 - Controls
+16 - About
+===Sub Menu "Pattern" Options===
+17 - Transpose
+18 - Interpolate
+19 - Duplicate
+1A - Remap
+1B - Wipe Pattern
+===Sub Menu "Select" Options===
+1C - All
+1D - None
+===Sub Menu "Synthesizer" Options===
+1E - YM2612
+1F - PSG
+20 - PCM
+21 - PWM
+22 - CUSTOM
+There is tons of information in RAM that will constantly be loaded by Screen Management and converted over to VDP data.
+
+Panels - These are used for building a layout. For purposes of understanding, we'll use the menubar and it's subsidies as a 
+means of discussing what panels are, and how they are used. 
+
+Menu bar panel dimensions and start x, y in 8 x 8 pixel tiles
+						       Dimensions  Location
+Menu Bar 						= 40, 1		0, 0
+File Menu 						= 10, 6		0, 1
+Edit Menu						= 9, 7		10, 1
+View Menu						= 17, 5		19, 1
+Help Menu						= 9, 4		0, 8
+Pattern SubMenu 				= 13, 5		9, 8
+Track Editor and Instruments 	= 7, 5		22, 8
+
+

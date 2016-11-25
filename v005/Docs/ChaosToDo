@@ -1,0 +1,46 @@
+Chaos Tracker TODO
+
+v005
+-Start on YM2612 and PSG patch system
+-Global and local YM2612 + PSG parameters and routines need to be independent from eachother
+-Expand YM2612 and PSG functions to cover all sound channels
+-Be as complete as possible. If features can't be implemented yet, create psuedo routines***
+-YM2612 panning data will be controlled through commands so for now just "OR" the L & R bits
+into the LFO/Stereo register
+-Create a buffer system for each parameter to be used in playback.**
+
+!!!We have a bug that needs fixing. The FM test preset isn't playing back correctly.
+Right now, the base for playback is being implemented and after changing code that loads
+presets and buffers, this glitch popped up. 
+
+**All channels should have a buffer for Note, Vol, Ins, Sound chip parameters, pretty much everything.
+***Some features to keep in mind are PSG's noise modes, YM2612's DAC, CH3 Special Mode, CSM mode...
+
+
+
+
+
+
+
+The below UI work is being put on hold until the sound engine is more concrete. It just doesn't make sense to do the UI first.
+
+-Rewrite the label highlighting system to be more modular, make changes 
+to AssistUI.c so that it works with this system. Right now there is a Menu option selection
+variable that is used for most of the highlights for all menus, but I think it should be more context dependent.
+As far as rewriting the AssistUI.c app, it would be great to code in an ASM label aka "FileMenuPanel:" for the start
+of each panel's label specifications. One possibility is implementing a specification file that specifies panels, labels, info
+etc. all for the app to process and make a good LUT, but I may never get that far with this little helper tool.
+
+-Add main menubar label highlighting
+
+-Move all menubar drawing to Plane B, making sure that it appears above Plane A
+
+-Think of ways to make the UI look much nicer while being effective.
+Something important to consider is that lsdj/YMDj/Prodigy Tracker method of pattern/track editing
+won't work well with the UI being designed. A new solution is necessary. I have a couple of ideas,
+one having a miniature Pattern Sequencer in a corner while displaying that entire row of 
+tracks all in one screen. M4G's UI was especially clever in this respect.
+
+-Modular, modular, modular! If people don't like the UI, I want it to be possible for another
+coder to come in and write a new plugin. Like some of the more modern emulators! You can create and use a different UI plugin,
+or possibly sound driver, whatever! THAT, is what will make these projects immortalized. 

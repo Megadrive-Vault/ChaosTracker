@@ -1,0 +1,55 @@
+This here is intended to be a high level overview for the entire sound engine in Chaos Tracker.
+
+68000
+
+We have 3 distinct outputs for sound on the Gen/MD.
+
+1)YM2612 Synth
+2)YM2612 DAC
+3)PSG
+
+The following tasks will be assigned to the 68k:
+-Handling note data for all 3 outputs
+-Writing sample buffer to z80 RAM
+-PCM freq control/soft synth(add/sub/pwm for now)/wavetable
+
+The following tasks will be assigned to the z80:
+-Reading sample buffer
+-Mixing and outputting mixed audio stream to YM2612 DAC
+
+It's not easy to see if it would be best to have z80 handle YM2612/PSG synth commands and freq data. The thing is, those commands and freq
+data is not how trackers store the music data. We have a byte; Rough example, the data representation of a note, say 00h means maybe B 0.
+But the tracker still has to translate that note into commands and freq data that the sound hardware understands. The z80 probably can't do 
+this because of restrictions on RAM access and processing power. Meaning the 68k would do it, regardless of the processor used to output music
+data. What this means is either the z80 outputs the music data, or the 68k does it. The way I imagine it in my mind, is not much benefit comes
+with using the z80 for this task, it would create alot of extra work on code and make syncing the two cpu's more difficult. No.
+
+
+Also DAC, how it works right now in Stef's XGM driver is the z80 reads commands and takes PCM samples, mixes them, outputs the data to DAC.
+I want to simplify this process. I would like to do a system that constantly outputs to the DAC regardless of anything, the sole exception 
+being playback off/paused and DAC disabled. So we need a z80 RAM buffer that is constantly filled by the 68k... which means sync issues and
+more work on the 68k. Maybe it's better to just have the z80 do all of that. The soft synth could be done in 68k, and the 68k could write to
+a synth buffer in z80, which the z80 could read from when needed. But who knows? Future investigation neccessary.
+
+
+
+For now I should create the handler for the YM2612, excluding the DAC for now. Last time, I coded myself into a corner and left out important
+features of the YM2612. This time however, all bases will be covered. I'll be sure to leave in a dummy routine or something for DAC features
+for now. So for all intents, purposes and testing, the program will pretend to be the tracker reading note, instrument and velocity from a 
+68k RAM location. The note will be used to tell the sound hardware everything that needs doing. All values, all registers will be accounted 
+for. Even variables for instrument patch locations and patch handling will be taken care of. 
+
+
+YM2612 FM and PSG
+So start with YM2612 FM handler. Then hardcode a patch, and do the patch handler... making sure it works with the FM handler.  
+Repeat this process with the PSG. PSG handler, soft ADSR handler, patch handler. Grats, now you can do a new playback engine.
+
+Playback
+Last time I did this, it worked.. but how well? There were some bugs. It was probably poorly optimized. Perhaps there's a better way to
+do a playback engine. The previous method, as I remember it was messy. The concept was sound sorta... which was basically read pattern, read
+phrase, read note/inst/vel/cmd, send to output and try to emulate the way lsdj did playback using a seeking function for blank patterns 
+and stuff. It worked, but like I said was messy. I suppose a similar approach could be taken, what are the options though?
+We can do it that way, but we could also read all the notes/inst/vel/cmds and write them to a small buffer, then read all that at once when
+reading all of the channels is finished. Guaranteeing better sync and reducing z80 bus requests. Well, that's a pretty good idea. Actually
+I really like that, we're doing it. This means we'll need an additional series of YM/PSG/DAC handlers, specifically for playback. This 
+increases ROM consumption but eases up on the busreqs and promises near perfect sync of all channels' playback. Yes.

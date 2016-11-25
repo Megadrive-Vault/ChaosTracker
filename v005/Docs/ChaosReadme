@@ -1,0 +1,69 @@
+Chaos Tracker
+
+Chaos Tracker is the spiritual successor to YMDj and Prodigy Tracker. During Prodigy development,
+I decided I wanted to go open source with the project. I was going to set up a repository for it
+but I didn't have an internet connection anymore, so I didn't get the best chance to upload 
+Prodigy Tracker's source code. As fate would have it, all the source code was lost. But let's face it...
+Prodigy had major issues, alot of them invisible to the end user. This was the result of me going into
+this project having no idea what to expect. Well, given the experience I now have, and the opportunity
+to start fresh, the birth of Chaos Tracker begins. But wait... Prodigy Tracker's source code was not lost.
+In fact, I found it and started working on it some more when it become more and more obvious that it was all
+hopeless. More than 90% of the program needed to be redone. So YMDj/ProdigyTracker is now vaporware.
+
+
+
+Why the name Chaos Tracker?
+YMDj was too much like lsdj and the whole Prodigy concept was sellout mainstream crap. I began hating 
+the project after I renamed it to Prodigy and felt less and less like I was developing it for fun 
+and more like I was doing it for the money. This is where the project started it's decline. 
+This is why donations will not be accepted until maybe possibly in the late development cycle. 
+Selling cartridges also could still be in the works, but I don't want money to contaminate 
+the enjoyment of developing a tracker for one of my favorite video game consoles. :) 
+
+That's nice but and all but why the name?
+Because it's a subtle reference to a very relevant and popular Sega game series and befits 
+a tracker of this ranking. That goes without saying, FM editing is a bit Chaotic at times.
+
+So what's the plan and the overall direction with Chaos Tracker?
+This time around I want to try something a bit different from the lsdj scheme. lsdj was successful
+because it was tailored for the Gameboy and it's limitations, lsdj pushed the hardware to it's max
+and was easy to access and use. The Sega Genesis/Megadrive/32x/CD are much more powerful and capable
+than the Gameboy and Chaos Tracker really wants to be custom built for these consoles.
+
+Chaos Tracker is for WHAT? Sega Genesis/Megadrive/32x/CD?!?!
+Yes. It's not yet certain whether this tracker will be one ROM for all consoles or if it will need to
+be ported separately, but this time around I want one solution for all relevant Sega hardware. This is
+one reason why this project will be open source. It's a bit large for only one developer.
+
+You're making this open source.
+Yes, more developers can work on it. More things can get done and in less time.
+
+
+Features please...
+1) (5 FM + 4 PCM) OR (6 FM) + 4 PSG  in the case of the Genesis/Megadrive. 
+2) Sega/Mega CD support will add tons of sampling features and storage.
+3) 32x support will add 2 Pulse Width Modulators and more storage, potentially effects.
+4) CD + 32x simultaneous support will be implemented.
+5) MIDI sync between Sega and non Sega consoles (A requirement is hardware developers to design 
+the peripherals and for the tracker devs of other consoles to add support for MIDI)
+6) Live mode
+7) z80 sound driver for Genesis/Megadrive mode.  
+
+Oh no you didnt!
+Oh yes I did ;)
+
+Any other projects?
+Yes, there is a Chaos Tracker derivative for the Gameboy Advance as well.
+
+It's a monopoly!
+Anyone can code their own tracker at any time they please.
+
+But why? 
+The readme is over you know...
+
+That doesn't answer my question.
+Fine, you're really rude you know that? 
+
+SEGA, Sega Genesis, Sega Megadrive, Sega/Mega CD, 32x and... (Chaos?) are trademarks of SEGA, and 
+Gameboy Advance is a trademark for Nintendo...NOT ME. I have no affiliation with these companies 
+and am just a fan developing software for their old hardware. That is all. So much for professionalism. 
